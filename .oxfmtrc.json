@@ -1,5 +1,6 @@
 {
   "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "experimentalSortPackageJson": false,
   "experimentalSortImports": {
     "groups": [
       ["external-type", "internal-type", "parent-type", "sibling-type", "index-type"],
@@ -9,8 +10,9 @@
       ["internal"],
       ["parent"],
       ["sibling"],
-      ["index"],
+      ["index"]
     ],
+    "newlinesBetween": false
   },
   "singleQuote": true,
   "ignorePatterns": [
@@ -21,6 +23,6 @@
     ".DS_Store",
     ".env*",
     ".vscode",
-    ".cursor",
-  ],
+    ".zed"
+  ]
 }
