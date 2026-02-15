@@ -1,18 +1,11 @@
 import { SQL } from 'bun';
 import { drizzle } from 'drizzle-orm/bun-sql';
 import { EnhancedQueryLogger } from 'drizzle-query-logger';
-import { z } from 'zod';
+import { dbCredentialsSchema } from '~/types/schemas/db-credentials';
 
-const dbOptionsSchema = z.object({
-  host: z.string(),
-  port: z.coerce.number(),
-  database: z.string(),
-  user: z.string(),
-  password: z.string(),
-  tls: z.transform((input) => input === 'true'),
-});
+const isProd = Bun.env.NODE_ENV === 'production';
 
-export const dbOptions = dbOptionsSchema.parse({
+export const dbOptions = dbCredentialsSchema.parse({
   host: Bun.env.DB_HOST,
   port: Bun.env.DB_PORT,
   database: Bun.env.DB_DATABASE,
@@ -20,8 +13,6 @@ export const dbOptions = dbOptionsSchema.parse({
   password: Bun.env.DB_PASSWORD,
   tls: Bun.env.DB_SSL,
 });
-
-const isProd = Bun.env.NODE_ENV === 'production';
 
 export const db = drizzle({
   client: new SQL(dbOptions),

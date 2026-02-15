@@ -1,5 +1,4 @@
 import { defineConfig } from 'drizzle-kit';
-
 import { dbOptions } from '~/database';
 
 export default defineConfig({
